@@ -46,7 +46,7 @@ local Tabs = {
     Visual = Window:AddTab({ Title = "Visual", Icon = "eye" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "settings" }),
     Hubs = Window:AddTab({ Title = "Hubs", Icon = "grid" }),
-    gamehubs = Window:AddTab({ Title = "game Hubs", Icon = "gamepad" })
+    GameHubs = Window:AddTab({ Title = "Game Hubs", Icon = "gamepad-2" })
 }
 
 -- Main Tab
@@ -195,7 +195,7 @@ Tabs.Misc:AddParagraph({
 })
 
 -- Hubs Tab
-local HubsSection = Tabs.Hubs:AddSection("script Hubs")
+local HubsSection = Tabs.Hubs:AddSection("Script Hubs")
 
 Tabs.Hubs:AddButton({
     Title = "Load Infinite Yield",
@@ -225,6 +225,7 @@ Tabs.Hubs:AddParagraph({
     Title = "About Hubs",
     Content = "Load popular script hubs and tools\nClick any button to execute the script"
 })
+
 -- Game Hubs Tab
 local GameHubsSection = Tabs.GameHubs:AddSection("Game-Specific Scripts")
 
