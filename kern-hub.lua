@@ -45,7 +45,7 @@ local Tabs = {
     Player = Window:AddTab({ Title = "Player", Icon = "user" }),
     Visual = Window:AddTab({ Title = "Visual", Icon = "eye" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "settings" }),
-    hubs = Window:AddTab({ Title = "hubs", Icon = "monitor" })
+    Hubs = Window:AddTab({ Title = "Hubs", Icon = "grid" })
 }
 
 -- Main Tab
@@ -190,11 +190,11 @@ Tabs.Misc:AddButton({
 
 Tabs.Misc:AddParagraph({
     Title = "Script Info",
-    Content = "Universal Script Hub\nVersion 1.0\nMade with Fluent UI Library"
+    Content = "kern Hub\nVersion 1.0\nby snowf1 - @snowf1."
 })
 
 -- Hubs Tab
-local HubsSection = Tabs.Hubs:AddSection("Script Hubs")
+local HubsSection = Tabs.Hubs:AddSection("script Hubs")
 
 Tabs.Hubs:AddButton({
     Title = "Load Infinite Yield",
@@ -390,6 +390,6 @@ InterfaceManager:BuildInterfaceSection(Tabs.Misc)
 -- Notification
 Fluent:Notify({
     Title = "Script Loaded",
-    Content = "kernever Hub loaded successfully!",
+    Content = "kern Hub loaded successfully!",
     Duration = 5
 })
