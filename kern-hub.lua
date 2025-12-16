@@ -261,6 +261,15 @@ Tabs.GameHubs:AddButton({
     end
 })
 
+Tabs.GameHubs:AddButton({
+    Title = "mirage hub Script",
+    Description = "the forge",
+    Callback = function()
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/2075c39b9a5a2e4414c59c93fe8a5f06.lua"))()
+   
+    end
+})
+
 Tabs.GameHubs:AddParagraph({
     Title = "About Game Hubs",
     Content = "Game-specific scripts and hubs\nOnly works in their respective games"
