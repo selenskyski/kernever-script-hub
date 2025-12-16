@@ -30,8 +30,8 @@ local ScriptState = {
 
 -- Create Window
 local Window = Fluent:CreateWindow({
-    Title = "Universal Script Hub",
-    SubTitle = "by Assistant",
+    Title = "kern Hub",
+    SubTitle = "by snowf1 - @snowf1.",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = true,
@@ -357,6 +357,6 @@ InterfaceManager:BuildInterfaceSection(Tabs.Misc)
 -- Notification
 Fluent:Notify({
     Title = "Script Loaded",
-    Content = "Universal Script Hub loaded successfully!",
+    Content = "kernever Hub loaded successfully!",
     Duration = 5
 })
