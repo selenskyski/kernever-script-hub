@@ -1,5 +1,6 @@
 # kernever-hub 🌽
-[logo](<img width="1280" height="720" alt="Image" src="https://github.com/user-attachments/assets/a5aa6d95-6690-41a3-af7d-e3661e3c6f06" />)
+<img width="1280" height="720" alt="KERN HUB" src="https://github.com/user-attachments/assets/3bd2cc23-b209-4751-adde-d67d776ea12f" />
+
 > [!IMPORTANT]
 > join our discord for future updates https://discord.gg/KwExw3Me5W
 # Changelog
