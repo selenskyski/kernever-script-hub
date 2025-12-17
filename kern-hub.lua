@@ -94,6 +94,105 @@ Tabs.Main:AddToggle("InfiniteJump", {
     end
 })
 
+-- Fun Section
+local FunSection = Tabs.Main:AddSection("🌽 Fun Stuff")
+
+local CornRainActive = false
+local CornSound = nil
+
+Tabs.Main:AddButton({
+    Title = "🌽 Corn Rain",
+    Description = "Make it rain corn with Gymnopédie No. 1",
+    Callback = function()
+        if CornRainActive then
+            Fluent:Notify({
+                Title = "Corn Rain",
+                Content = "Corn rain is already active!",
+                Duration = 3
+            })
+            return
+        end
+        
+        CornRainActive = true
+        
+        Fluent:Notify({
+            Title = "🌽 Corn Rain Activated!",
+            Content = "Enjoy the peaceful corn shower...",
+            Duration = 5
+        })
+        
+        -- Create and play Gymnopédie No. 1
+        CornSound = Instance.new("Sound")
+        CornSound.SoundId = "rbxassetid://1838635082" -- Gymnopédie No. 1
+        CornSound.Volume = 0.5
+        CornSound.Looped = false
+        CornSound.Parent = workspace
+        CornSound:Play()
+        
+        -- Corn rain function
+        local function SpawnCorn()
+            if not CornRainActive then return end
+            
+            local corn = Instance.new("Part")
+            corn.Name = "FallingCorn"
+            corn.Size = Vector3.new(2, 3, 2)
+            corn.Position = RootPart.Position + Vector3.new(
+                math.random(-50, 50),
+                math.random(30, 50),
+                math.random(-50, 50)
+            )
+            corn.CanCollide = true
+            corn.Material = Enum.Material.SmoothPlastic
+            
+            -- Add the corn mesh
+            local mesh = Instance.new("SpecialMesh")
+            mesh.MeshType = Enum.MeshType.FileMesh
+            mesh.MeshId = "rbxassetid://12526068763"
+            mesh.Scale = Vector3.new(1, 1, 1)
+            mesh.Parent = corn
+            
+            corn.Parent = workspace
+            
+            -- Remove corn after 10 seconds to prevent lag
+            game:GetService("Debris"):AddItem(corn, 10)
+        end
+        
+        -- Spawn corn every 0.3 seconds for 3 minutes (duration of song)
+        local cornSpawnCount = 0
+        local maxCornSpawns = 600 -- About 3 minutes worth
+        
+        local cornLoop = RunService.Heartbeat:Connect(function()
+            if not CornRainActive or cornSpawnCount >= maxCornSpawns then
+                CornRainActive = false
+                if CornSound then
+                    CornSound:Stop()
+                    CornSound:Destroy()
+                end
+                return
+            end
+            
+            if math.random() < 0.1 then -- 10% chance each frame
+                SpawnCorn()
+                cornSpawnCount = cornSpawnCount + 1
+            end
+        end)
+        
+        -- Stop after song ends
+        task.delay(180, function()
+            CornRainActive = false
+            if CornSound then
+                CornSound:Stop()
+                CornSound:Destroy()
+            end
+            Fluent:Notify({
+                Title = "🌽 Corn Rain Ended",
+                Content = "The corn rain has stopped.",
+                Duration = 3
+            })
+        end)
+    end
+})
+
 -- Feedback Section
 local FeedbackSection = Tabs.Main:AddSection("Feedback & Support")
 
