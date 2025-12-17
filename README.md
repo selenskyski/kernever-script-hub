@@ -1,5 +1,5 @@
 # kernever-hub 🌽
-
+[logo](https://github.com/user-attachments/assets/ae4de350-93ef-4499-939a-5edfa1bfbe11)
 > [!IMPORTANT]
 > join our discord for future updates https://discord.gg/KwExw3Me5W
 # Changelog
