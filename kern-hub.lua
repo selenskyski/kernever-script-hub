@@ -28,6 +28,9 @@ local ScriptState = {
     FlySpeed = 50
 }
 
+-- Discord Webhook URL (Replace with your webhook)
+local WebhookURL = "https://discord.com/api/webhooks/1450637274046796006/cJYhGcFWx8aEoNfG3AIm_0lgtCvr8iC-BhfJki6Lkfb1EtH81rq2d1I0At6mAkVF4gnW"
+
 -- Create Window
 local Window = Fluent:CreateWindow({
     Title = "kern Hub",
@@ -88,6 +91,161 @@ Tabs.Main:AddToggle("InfiniteJump", {
     Default = false,
     Callback = function(Value)
         ScriptState.InfiniteJump = Value
+    end
+})
+
+-- Feedback Section
+local FeedbackSection = Tabs.Main:AddSection("Feedback & Support")
+
+local FeedbackInput = Tabs.Main:AddInput("FeedbackInput", {
+    Title = "Report/Suggestion",
+    Description = "Enter your message here",
+    Default = "",
+    Placeholder = "Type your message...",
+    Numeric = false,
+    Finished = false,
+    Callback = function(Value)
+        -- Callback is optional for input
+    end
+})
+
+Tabs.Main:AddButton({
+    Title = "Send Report",
+    Description = "Report a bug or issue",
+    Callback = function()
+        local message = FeedbackInput.Value
+        if message == "" or message == "Type your message..." then
+            Fluent:Notify({
+                Title = "Error",
+                Content = "Please enter a message first!",
+                Duration = 3
+            })
+            return
+        end
+        
+        local success = pcall(function()
+            local http = game:GetService("HttpService")
+            local data = {
+                ["content"] = "",
+                ["embeds"] = {{
+                    ["title"] = "🐛 Bug Report",
+                    ["description"] = message,
+                    ["color"] = 15158332, -- Red color
+                    ["fields"] = {
+                        {
+                            ["name"] = "Player",
+                            ["value"] = LocalPlayer.Name,
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "User ID",
+                            ["value"] = tostring(LocalPlayer.UserId),
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "Game",
+                            ["value"] = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+                            ["inline"] = false
+                        }
+                    },
+                    ["timestamp"] = os.date("!%Y-%m-%dT%H:%M:%S")
+                }}
+            }
+            
+            local response = request({
+                Url = WebhookURL,
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json"
+                },
+                Body = http:JSONEncode(data)
+            })
+        end)
+        
+        if success then
+            Fluent:Notify({
+                Title = "Report Sent!",
+                Content = "Your bug report has been submitted.",
+                Duration = 4
+            })
+            FeedbackInput:SetValue("")
+        else
+            Fluent:Notify({
+                Title = "Error",
+                Content = "Failed to send report. Check webhook URL.",
+                Duration = 4
+            })
+        end
+    end
+})
+
+Tabs.Main:AddButton({
+    Title = "Send Suggestion",
+    Description = "Suggest a new feature",
+    Callback = function()
+        local message = FeedbackInput.Value
+        if message == "" or message == "Type your message..." then
+            Fluent:Notify({
+                Title = "Error",
+                Content = "Please enter a message first!",
+                Duration = 3
+            })
+            return
+        end
+        
+        local success = pcall(function()
+            local http = game:GetService("HttpService")
+            local data = {
+                ["content"] = "",
+                ["embeds"] = {{
+                    ["title"] = "💡 Suggestion",
+                    ["description"] = message,
+                    ["color"] = 3447003, -- Blue color
+                    ["fields"] = {
+                        {
+                            ["name"] = "Player",
+                            ["value"] = LocalPlayer.Name,
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "User ID",
+                            ["value"] = tostring(LocalPlayer.UserId),
+                            ["inline"] = true
+                        },
+                        {
+                            ["name"] = "Game",
+                            ["value"] = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name,
+                            ["inline"] = false
+                        }
+                    },
+                    ["timestamp"] = os.date("!%Y-%m-%dT%H:%M:%S")
+                }}
+            }
+            
+            local response = request({
+                Url = WebhookURL,
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json"
+                },
+                Body = http:JSONEncode(data)
+            })
+        end)
+        
+        if success then
+            Fluent:Notify({
+                Title = "Suggestion Sent!",
+                Content = "Your suggestion has been submitted.",
+                Duration = 4
+            })
+            FeedbackInput:SetValue("")
+        else
+            Fluent:Notify({
+                Title = "Error",
+                Content = "Failed to send suggestion. Check webhook URL.",
+                Duration = 4
+            })
+        end
     end
 })
 
@@ -258,15 +416,6 @@ Tabs.GameHubs:AddButton({
     Description = "Adopt Me automation",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub"))()
-    end
-})
-
-Tabs.GameHubs:AddButton({
-    Title = "mirage hub Script",
-    Description = "the forge",
-    Callback = function()
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/2075c39b9a5a2e4414c59c93fe8a5f06.lua"))()
-   
     end
 })
 
