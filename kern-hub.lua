@@ -28,8 +28,20 @@ local ScriptState = {
     FlySpeed = 50
 }
 
--- Discord Webhook URL (btw if you are thinking of doing something with this, it's not worth it)
-local WebhookURL = "https://discord.com/api/webhooks/1450637274046796006/cJYhGcFWx8aEoNfG3AIm_0lgtCvr8iC-BhfJki6Lkfb1EtH81rq2d1I0At6mAkVF4gnW"
+
+-- Encrypt the Webhook URL (store encryption key securely, this is an example)
+local HttpService = game:GetService("HttpService")
+
+-- Encrypted Webhook (Base64 Encoding as an example of light obfuscation)
+local EncodedWebhook = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTQ1MDYzNzI3NDA0Njc5NjAwNi9jSllaR2NGV3g4YUVvTmYzQUltXzBsdGNYdnI4aUMtQmhmSmtpNkxrZmIxRXRYODFycTJkMUkwQXQ2bUFrVkY0Z25X"
+
+-- Decode function
+local function DecodeUrl(encoded)
+    return HttpService:UrlDecode(HttpService:Base64Decode(encoded))
+end
+
+-- Decoded URL retrieved dynamically
+local WebhookURL = DecodeUrl(EncodedWebhook)
 
 -- Create Window
 local Window = Fluent:CreateWindow({
